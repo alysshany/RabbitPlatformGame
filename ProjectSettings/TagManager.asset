@@ -9,6 +9,11 @@ TagManager:
   - Ground
   - Enemy
   - Spring
+  - Boy
+  - Girl
+  - BoyLetter
+  - GirlLetter
+  - ClickLetter
   layers:
   - Default
   - TransparentFX
