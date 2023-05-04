@@ -48,7 +48,7 @@ public class MalePlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MovingPlatform"))
         {
             isGrounded = true;
         }
@@ -56,11 +56,17 @@ public class MalePlayerController : MonoBehaviour
         {
             Animator animatorSpring = collision.gameObject.GetComponent<Animator>();
             animatorSpring.SetBool("Up", true);
-            rigidbody.velocity = new Vector2(0, 6f);
+            rigidbody.velocity = new Vector2(0, 8f);
             isGrounded = false;
             animator.SetBool("Up", false);
         }
         if (collision.gameObject.CompareTag("Enemy") && isGrounded)
+        {
+            animator.SetBool("Hurt", true);
+            StartCoroutine(WaitForSecond());
+
+        }
+        if (collision.gameObject.CompareTag("FlyingEnemy"))
         {
             animator.SetBool("Hurt", true);
             StartCoroutine(WaitForSecond());
