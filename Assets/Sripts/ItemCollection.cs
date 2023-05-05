@@ -15,10 +15,6 @@ public class ItemCollection : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("BronzeCoin"))
-        {
-            Destroy(collision.gameObject);
-        }
         if (collision.gameObject.CompareTag("GoldenCoin"))
         {
             Destroy(collision.gameObject);
