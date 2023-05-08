@@ -7,6 +7,7 @@ public class GirlPlayerController : MonoBehaviour
     private Rigidbody2D rigidbody;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private Animator animatorSpring;
     private bool isGrounded;
 
     // Start is called before the first frame update
@@ -48,16 +49,30 @@ public class GirlPlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.CompareTag("Boy"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.CompareTag("Boy") || collision.gameObject.CompareTag("BreakingPlatform"))
         {
             isGrounded = true;
         }
         if (collision.gameObject.CompareTag("Spring"))
         {
+            animatorSpring = collision.gameObject.GetComponent<Animator>();
+            animatorSpring.SetBool("Up", true);
             rigidbody.velocity = new Vector2(0, 8f);
             isGrounded = false;
+            StartCoroutine(WaitForSecondsSpring(animatorSpring));
+        }
+        if (collision.gameObject.CompareTag("LevelArm"))
+        {
+            animatorSpring = collision.gameObject.GetComponent<Animator>();
+            animatorSpring.SetBool("Active", !animatorSpring.GetBool("Active"));
         }
         if (collision.gameObject.CompareTag("Enemy") && isGrounded)
+        {
+            animator.SetBool("Hurt", true);
+            StartCoroutine(WaitForSecond());
+
+        }
+        if (collision.gameObject.CompareTag("HalfEnemy"))
         {
             animator.SetBool("Hurt", true);
             StartCoroutine(WaitForSecond());
@@ -69,9 +84,18 @@ public class GirlPlayerController : MonoBehaviour
             StartCoroutine(WaitForSecond());
 
         }
+        if (collision.gameObject.CompareTag("ToDyingPlatform"))
+        {
+            PlayerPrefs.SetString("Alive", "No");
+            //умирает тут
+        }
         if (collision.gameObject.CompareTag("Enemy") && !isGrounded)
         {
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("BreakingPlatform"))
+        {
+            StartCoroutine(WaitForSecondToDestroy(collision.gameObject));
         }
     }
 
@@ -79,5 +103,18 @@ public class GirlPlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         animator.SetBool("Hurt", false);
+        PlayerPrefs.SetString("Alive", "No");
+    }
+
+    IEnumerator WaitForSecondToDestroy(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+
+    IEnumerator WaitForSecondsSpring(Animator animatorSpring)
+    {
+        yield return new WaitForSeconds(0.5f);
+        animatorSpring.SetBool("Up", false);
     }
 }

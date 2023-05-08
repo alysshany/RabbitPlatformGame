@@ -9,10 +9,12 @@ public class ItemCollection : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("GirlLetter") && gameObject.CompareTag("Girl"))
         {
+            PlayerPrefs.SetInt("ActualCountOfLetters", PlayerPrefs.GetInt("ActualCountOfLetters") + 1);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("BoyLetter") && gameObject.CompareTag("Boy"))
         {
+            PlayerPrefs.SetInt("ActualCountOfLetters", PlayerPrefs.GetInt("ActualCountOfLetters") + 1);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("GoldenCoin"))

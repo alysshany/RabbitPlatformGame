@@ -7,6 +7,10 @@ public class LetterUp : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        Destroy(this.gameObject);
+        if (gameObject.CompareTag("ClickLetter") )
+        {
+            PlayerPrefs.SetInt("ActualCountOfLetters", PlayerPrefs.GetInt("ActualCountOfLetters") + 1);
+            Destroy(this.gameObject);
+        }
     }
 }
