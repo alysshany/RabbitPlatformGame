@@ -8,7 +8,13 @@ public class GirlPlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Animator animatorSpring;
-    private bool isGrounded;
+
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask groundLayer;
+    private bool isTouchingGround;
+
+    private bool stayingOnBunny;
 
     // Start is called before the first frame update
     void Start()
@@ -16,19 +22,20 @@ public class GirlPlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        isGrounded = true;
+
+        stayingOnBunny = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         float dir = Input.GetAxisRaw("Horizontal");
         rigidbody.velocity = new Vector2(dir * 3f, rigidbody.velocity.y);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (isTouchingGround && Input.GetKeyDown(KeyCode.UpArrow) || stayingOnBunny && Input.GetKeyDown(KeyCode.UpArrow))
         {
             rigidbody.velocity = new Vector2(0, 6f);
-            isGrounded = false;
         }
 
         if (dir > 0f)
@@ -49,16 +56,19 @@ public class GirlPlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.CompareTag("Boy") || collision.gameObject.CompareTag("BreakingPlatform"))
+        if (collision.gameObject.CompareTag("Boy"))
         {
-            isGrounded = true;
+            stayingOnBunny = true;
+        }
+        else
+        {
+            stayingOnBunny = false;
         }
         if (collision.gameObject.CompareTag("Spring"))
         {
             animatorSpring = collision.gameObject.GetComponent<Animator>();
             animatorSpring.SetBool("Up", true);
             rigidbody.velocity = new Vector2(0, 8f);
-            isGrounded = false;
             StartCoroutine(WaitForSecondsSpring(animatorSpring));
         }
         if (collision.gameObject.CompareTag("LevelArm"))
@@ -66,7 +76,7 @@ public class GirlPlayerController : MonoBehaviour
             animatorSpring = collision.gameObject.GetComponent<Animator>();
             animatorSpring.SetBool("Active", !animatorSpring.GetBool("Active"));
         }
-        if (collision.gameObject.CompareTag("Enemy") && isGrounded)
+        if (collision.gameObject.CompareTag("Enemy") && isTouchingGround)
         {
             animator.SetBool("Hurt", true);
             StartCoroutine(WaitForSecond());
@@ -89,7 +99,7 @@ public class GirlPlayerController : MonoBehaviour
             PlayerPrefs.SetString("Alive", "No");
             //умирает тут
         }
-        if (collision.gameObject.CompareTag("Enemy") && !isGrounded)
+        if (collision.gameObject.CompareTag("Enemy") && !isTouchingGround)
         {
             Destroy(collision.gameObject);
         }

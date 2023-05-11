@@ -9,6 +9,13 @@ public class PortalWorking : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        collider.gameObject.transform.position = new Vector2(otherPortal.transform.position.x - 0.55f, otherPortal.transform.position.y);
+        if (this.gameObject.CompareTag("ToLeftPortal"))
+        {
+            collider.gameObject.transform.position = new Vector2(otherPortal.transform.position.x - 0.55f, otherPortal.transform.position.y);
+        }
+        else if (this.gameObject.CompareTag("ToRightPortal"))
+        {
+            collider.gameObject.transform.position = new Vector2(otherPortal.transform.position.x + 0.55f, otherPortal.transform.position.y);
+        }
     }
 }
