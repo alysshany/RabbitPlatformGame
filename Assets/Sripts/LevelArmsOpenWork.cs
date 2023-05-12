@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelArmsWork : MonoBehaviour
+public class LevelArmsOpenWork : MonoBehaviour
 {
     [SerializeField] private GameObject gameObjectToSee;
     private Animator animator;

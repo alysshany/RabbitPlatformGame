@@ -14,7 +14,6 @@ public class LoadingLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         clickedButton.onClick.AddListener(LoadScene);
     }
 
