@@ -35,7 +35,7 @@ public class MalePlayerController : MonoBehaviour
             float dir = Input.GetAxisRaw("HorizontalWASD");
             rigidbody.velocity = new Vector2(dir * 3f, rigidbody.velocity.y);
 
-            if (isTouchingGround && Input.GetKeyDown(KeyCode.W) || stayingOnBunny && Input.GetKeyDown(KeyCode.W))
+            if (isTouchingGround && Input.GetKeyDown(KeyCode.W))
             {
                 rigidbody.velocity = new Vector2(0, 6f);
             }

@@ -35,7 +35,7 @@ public class GirlPlayerController : MonoBehaviour
             float dir = Input.GetAxisRaw("Horizontal");
             rigidbody.velocity = new Vector2(dir * 3f, rigidbody.velocity.y);
 
-            if (isTouchingGround && Input.GetKeyDown(KeyCode.UpArrow) || stayingOnBunny && Input.GetKeyDown(KeyCode.UpArrow))
+            if (isTouchingGround && Input.GetKeyDown(KeyCode.UpArrow))
             {
                 rigidbody.velocity = new Vector2(0, 6f);
             }

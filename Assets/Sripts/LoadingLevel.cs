@@ -28,7 +28,6 @@ public class LoadingLevel : MonoBehaviour
         PlayerPrefs.SetString("Alive", "Yes");
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("GameScene");
-        
         GameObject levelToOpen = listOfLevels[PlayerPrefs.GetInt("Level")];
         
         levelToOpen.SetActive(true);
