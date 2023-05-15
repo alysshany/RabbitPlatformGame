@@ -19,6 +19,7 @@ public class ItemCollection : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("GoldenCoin"))
         {
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 1);
             Destroy(collision.gameObject);
         }
     }

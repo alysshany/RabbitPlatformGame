@@ -23,6 +23,8 @@ public class CheckAlphabetForGoingTowards : MonoBehaviour
     [SerializeField]
     private GameObject _letterPanelPrefabOfQA;
 
+    [SerializeField] private GameObject canvasOfWinToOpen;
+
     char[] stringChars;
     char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
@@ -75,7 +77,9 @@ public class CheckAlphabetForGoingTowards : MonoBehaviour
 
         if (checkingValue && checkingString.ToUpper() == answer.ToUpper())
         {
-            Debug.Log("WIN рхон");
+            canvasToOpen.SetActive(false);
+            canvasOfWinToOpen.SetActive(true);
+            
         }
     }
 

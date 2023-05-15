@@ -29,28 +29,31 @@ public class MalePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        float dir = Input.GetAxisRaw("HorizontalWASD");
-        rigidbody.velocity = new Vector2(dir * 3f, rigidbody.velocity.y);
+        if (Time.timeScale == 1.0f)
+        {
+            isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            float dir = Input.GetAxisRaw("HorizontalWASD");
+            rigidbody.velocity = new Vector2(dir * 3f, rigidbody.velocity.y);
 
-        if (isTouchingGround && Input.GetKeyDown(KeyCode.W) || stayingOnBunny && Input.GetKeyDown(KeyCode.W))
-        {
-            rigidbody.velocity = new Vector2(0, 6f);
-        }
+            if (isTouchingGround && Input.GetKeyDown(KeyCode.W) || stayingOnBunny && Input.GetKeyDown(KeyCode.W))
+            {
+                rigidbody.velocity = new Vector2(0, 6f);
+            }
 
-        if (dir > 0f)
-        {
-            animator.SetBool("Running", true);
-            spriteRenderer.flipX = false;
-        }
-        else if (dir < 0f)
-        {
-            animator.SetBool("Running", true);
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            animator.SetBool("Running", false);
+            if (dir > 0f)
+            {
+                animator.SetBool("Running", true);
+                spriteRenderer.flipX = false;
+            }
+            else if (dir < 0f)
+            {
+                animator.SetBool("Running", true);
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                animator.SetBool("Running", false);
+            }
         }
     }
 
