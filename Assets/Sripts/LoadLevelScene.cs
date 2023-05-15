@@ -23,6 +23,7 @@ public class LoadLevelScene : MonoBehaviour
 
     void LoadScene()
     {
+
         PlayerPrefs.SetString("Alive", "Yes");
         Time.timeScale = 1.0f;
 

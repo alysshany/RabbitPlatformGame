@@ -26,12 +26,12 @@ public class TextUpdater : MonoBehaviour
     {
         textField.text = PlayerPrefs.GetInt("Coins").ToString();
 
-        if (PlayerPrefs.GetInt("Coins") >= 10)
+        if (PlayerPrefs.GetInt("Coins") >= 10 && PlayerPrefs.GetString("FirstLevel") == "Finish")
         {
             buttonOfSecondLevel.SetActive(true);
             countOfCoinsForSecond.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Coins") >= 20)
+        if (PlayerPrefs.GetInt("Coins") >= 20 && PlayerPrefs.GetString("FirstLevel") == "Finish" && PlayerPrefs.GetString("SecondLevel") == "Finish")
         {
             buttonOfThirdLevel.SetActive(true);
             countOfCoinsForThird.SetActive(false);

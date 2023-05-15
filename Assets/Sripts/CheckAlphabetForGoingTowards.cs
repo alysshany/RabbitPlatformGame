@@ -10,6 +10,7 @@ public class CheckAlphabetForGoingTowards : MonoBehaviour
     [SerializeField] private GameObject canvasToOpen;
     [SerializeField] private string answer;
     [SerializeField] private Button buttonToClick;
+    [SerializeField] private string levelString;
 
     //Panel of letters
     [SerializeField]
@@ -80,6 +81,15 @@ public class CheckAlphabetForGoingTowards : MonoBehaviour
             canvasToOpen.SetActive(false);
             canvasOfWinToOpen.SetActive(true);
             
+            switch(levelString)
+            {
+                case "first": PlayerPrefs.SetString("FirstLevel", "Finish");
+                    break;
+                case "second": PlayerPrefs.SetString("SecondLevel", "Finish");
+                    break;
+                case "third": PlayerPrefs.SetString("ThirdLevel", "Finish");
+                    break;
+            }
         }
     }
 

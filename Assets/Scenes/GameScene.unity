@@ -14494,6 +14494,7 @@ MonoBehaviour:
   canvasToOpen: {fileID: 955231650}
   answer: friend
   buttonToClick: {fileID: 1731637400}
+  levelString: second
   _letterPanel: {fileID: 1079667123}
   _letterPanelPrefab: {fileID: 6632357925533162471, guid: c967d21b0ddad4042afc2cd8b0c2599b, type: 3}
   _letterPanelOfQA: {fileID: 858468478}
@@ -33227,6 +33228,7 @@ MonoBehaviour:
   canvasToOpen: {fileID: 955231650}
   answer: castle
   buttonToClick: {fileID: 1731637400}
+  levelString: third
   _letterPanel: {fileID: 1079667123}
   _letterPanelPrefab: {fileID: 6632357925533162471, guid: c967d21b0ddad4042afc2cd8b0c2599b, type: 3}
   _letterPanelOfQA: {fileID: 858468478}
@@ -39647,6 +39649,7 @@ MonoBehaviour:
   canvasToOpen: {fileID: 955231650}
   answer: adventure
   buttonToClick: {fileID: 1731637400}
+  levelString: first
   _letterPanel: {fileID: 1079667123}
   _letterPanelPrefab: {fileID: 6632357925533162471, guid: c967d21b0ddad4042afc2cd8b0c2599b, type: 3}
   _letterPanelOfQA: {fileID: 858468478}
